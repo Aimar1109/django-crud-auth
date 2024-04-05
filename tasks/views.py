@@ -44,7 +44,8 @@ def signup(request):
 def tasks(request):
     tasks = Task.objects.filter(user=request.user, datecomplete__isnull=True)
     return render(request, 'tasks.html', {
-        'tasks': tasks
+        'tasks': tasks,
+        'state': 'Pending'
     })
 
 
@@ -53,7 +54,8 @@ def tasks_completed(request):
     tasks = Task.objects.filter(
         user=request.user, datecomplete__isnull=False).order_by('-datecomplete')
     return render(request, 'tasks.html', {
-        'tasks': tasks
+        'tasks': tasks,
+        'state': 'Completed'
     })
 
 
